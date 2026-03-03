@@ -1,0 +1,42 @@
+# Configuração de line endings para o projeto
+# Garante consistência entre diferentes sistemas operacionais
+
+# Arquivos de texto devem usar LF no repositório
+* text=auto eol=lf
+
+# Scripts Python devem usar LF
+*.py text eol=lf
+*.pyw text eol=lf
+
+# Scripts shell devem usar LF
+*.sh text eol=lf
+*.bash text eol=lf
+
+# Arquivos de configuração
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
+*.ini text eol=lf
+*.env text eol=lf
+*.md text eol=lf
+
+# Arquivos de código
+*.js text eol=lf
+*.ts text eol=lf
+*.jsx text eol=lf
+*.tsx text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+
+# Arquivos binários não devem ser convertidos
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.tar binary
+*.gz binary
+

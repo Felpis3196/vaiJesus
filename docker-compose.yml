@@ -1,0 +1,57 @@
+# version removido: atributo obsoleto no Docker Compose v2+
+# Para testar só a API: docker compose up ai-api  (acesse http://localhost:8000)
+# Para LLM local (Ollama no host): use LLM_BASE_URL=http://host.docker.internal:11434/v1
+services:
+  ai-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - AI_AUDIT_LOG_LEVEL=INFO
+      - AI_AUDIT_OUTPUT_DIR=/app/data
+      - AI_AUDIT_MAX_FILE_SIZE=50
+      - AI_AUDIT_ENABLE_NLP=true
+      - AI_AUDIT_ENABLE_PREDICTIVE=true
+      # Extração 100% LLM: defina um dos dois abaixo
+      - LLM_EXTRACTION_ENABLED=true
+      - LLM_BASE_URL=${LLM_BASE_URL:-}
+      - LLM_MODEL=${LLM_MODEL:-llama3.1}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+      - ./backups:/app/backups
+    # Permite ao container acessar serviços no host (ex.: Ollama) em qualquer OS
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/nginx.conf:/etc/nginx/nginx.conf
+      - ./deploy/ssl:/etc/nginx/ssl
+      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - ai-api
+    restart: unless-stopped
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+volumes:
+  redis_data:

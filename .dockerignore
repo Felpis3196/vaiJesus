@@ -1,0 +1,45 @@
+# Git e IDE
+.git
+.gitignore
+.cursor
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv
+.venv
+env
+.env.local
+*.egg-info
+.eggs
+dist
+build
+
+# Testes e cobertura (opcional: remova se quiser rodar testes na imagem)
+.pytest_cache
+.coverage
+htmlcov
+.tox
+
+# Logs e dados locais (montados por volume no compose)
+logs
+data
+backups
+*.log
+api.log
+
+# Documentação e planos (não necessários em runtime)
+*.plan.md
+docs
+
+# SSL (usar volume ou deploy/ssl no host)
+ssl
+
+# Outros
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

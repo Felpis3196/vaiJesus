@@ -1,0 +1,7 @@
+Data,Descricao,Tipo,Valor
+2025-01-01,Recebimento taxa condominial apto 101,Receita,500.0
+2025-01-05,Pagamento conta de agua,Despesa,150.0
+2025-01-10,Salario do zelador,Despesa,1200.0
+2025-01-15,Compra de material de limpeza,Despesa,80.0
+2025-01-20,Recebimento aluguel salao de festas,Receita,200.0
+2025-01-25,Manutencao elevador,Despesa,300.0
